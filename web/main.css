@@ -1,3 +1,95 @@
+
 html {
-  font-family: "华文宋体";
+    width: 1024px;
+    margin: auto;
+    font-size: 16px;
+}
+
+
+#page-header {
+    display: grid;
+    grid-template-columns: 320px minmax(100px, auto) 120px;
+
+    align-items: center;
+}
+
+#page-header-logo>img {
+    display: inline-block;
+}
+
+#page-header-find {
+    justify-self: right;
+}
+
+#page-header-user {
+    justify-self: center;
+}
+
+#page-header-menu {
+    grid-column: 1/4;
+}
+
+#page-header-menu>ul {
+    display: flex;
+    align-items: center;
+
+    padding: 0px 32px;
+    margin: auto;
+
+    color: white;
+    background-color: rgba(9, 59, 219, 0.7);
+}
+
+#page-header-menu>ul>li {
+    display: inline-block;
+
+    width: 100px;
+    height: 38px;
+
+    cursor: pointer;
+    text-align: center;
+
+    margin: auto;
+}
+
+#page-header-menu>ul>li>div {
+    height: 38px;
+    line-height: 38px;
+}
+
+#page-header-menu>ul>li:hover {
+    font-weight: bold;
+    background-color: blue;
+}
+
+#page-header-menu>ul>li>ul {
+    display: none;
+
+    width: 100px;
+
+    text-align: center;
+    background-color: rgba(9, 59, 219, 0.7);
+
+    padding: 4px 0px 8px 0px;
+}
+
+#page-header-menu>ul>li>ul>li {
+    display: block;
+    list-style: none;
+
+    margin: 8px;
+}
+
+#page-header-menu>ul>li:hover>ul {
+    display: block;
+}
+
+
+#page-footer {
+    display: block;
+
+    width: 100%;
+    height: 240px;
+
+    background-color: rgba(9, 59, 219, 0.7);
 }
