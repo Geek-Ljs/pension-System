@@ -5,6 +5,10 @@ html {
     font-size: 16px;
 }
 
+p {
+    text-indent: 2rem;
+    padding: 0rem 8rem;
+}
 
 #page-header {
     display: grid;
@@ -27,6 +31,10 @@ html {
 
 #page-header-menu {
     grid-column: 1/4;
+}
+
+#page-header-menu>div {
+    display: none;
 }
 
 #page-header-menu>ul {
@@ -92,4 +100,117 @@ html {
     height: 240px;
 
     background-color: rgba(9, 59, 219, 0.7);
+}
+
+
+
+@media screen and (max-width: 768px) {
+    html {
+        width: 100%;
+        margin: auto;
+
+        font-size: 24px;
+    }
+
+    p {
+        text-indent: 2rem;
+
+        padding: 0rem 1rem;
+    }
+
+    #page-header {
+        display: grid;
+        grid-template-areas: "PageHeaderMenu PageHeaderUser PageHeaderFind";
+        grid-template-columns: 120px auto 120px;
+
+        background-color: rgba(9, 59, 219, 0.7);
+    }
+
+    #page-header-logo {
+        display: none;
+    }
+
+    #page-header-find {
+        grid-area: PageHeaderFind;
+
+    }
+
+    #page-header-user {
+        grid-area: PageHeaderUser;
+        justify-self: center;
+
+        color: white;
+    }
+
+    #page-header-user a:not(:first-child) {
+        display: none;
+    }
+
+    #page-header-menu {
+        display: block;
+        grid-area: PageHeaderMenu;
+    }
+
+    #page-header-menu>div:first-child {
+        display: block;
+
+        cursor: pointer;
+    }
+
+    #page-header-menu>div:nth-child(2) {
+        display: none;
+
+        position: absolute;
+        top: 0px;
+        right: 0px;
+
+        width: 65%;
+        height: 100%;
+    }
+
+    #page-header-menu>ul {
+        display: none;
+
+        /* display: flex; */
+        flex-direction: column;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+
+        width: 35%;
+        height: 100%;
+    
+        padding: 0px;
+        margin: auto;
+    
+        color: white;
+        background-color: rgba(9, 59, 219, 0.7);
+    }
+    
+    #page-header-menu>ul>li {
+        display: block;
+    
+        cursor: pointer;
+        text-align: center;
+    
+        margin: auto;
+        margin-left: 10%;
+    }
+    
+    #page-header-menu>ul>li>div {
+        height: 38px;
+    }
+
+    #page-header-menu>ul>li:hover {
+        /* 需要消除以前定义的 hover。 */
+    }
+
+    #page-header-menu>ul>li>ul {
+        display: block;
+
+        background: none;
+
+        margin-left: 45%;
+    }
 }
