@@ -17,10 +17,23 @@
                 </form>
             </div>
             <div id="page-header-user">
-                <a>Log in</a><a> | </a><a>Log up</a>
+                <a href="#">Log in</a><a> | </a><a href="#">Log up</a>
             </div>
             <div id="page-header-menu">
-                <div>三</div> <!-- 侧边按钮 -->
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 120 120">
+                        <defs>
+                            <style>
+                                rect {
+                                    fill: white;
+                                }
+                            </style>
+                        </defs>
+                        <rect x="20" y="35" width="80" height="10" rx="5" ry="5"/>
+                        <rect x="20" y="55" width="80" height="10" rx="5" ry="5"/>
+                        <rect x="20" y="75" width="80" height="10" rx="5" ry="5"/>
+                    </svg>
+                </div> <!-- 侧边按钮 -->
                 <div></div> <!-- 右侧空白 -->
                 <ul>
                     <li>
@@ -87,6 +100,75 @@
                     uls[i].style.display = 'none';
                 }
             }
+        </script>
+
+        <!-- 轮播图 -->
+        <div class="rotated-graph">
+            <ul class="rotated-graph-images">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+            <ul class="rotated-graph-mapped">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <button>&lt;</button>
+            <button>&gt;</button>
+        </div>
+        <script>
+            var rotatedImages = document.querySelectorAll('ul.rotated-graph-images>li'),
+                rotatedMapped = document.querySelectorAll('ul.rotated-graph-mapped>li');
+
+            var recentIndex = 0, totalImages = rotatedImages.length;
+
+            function resetRotatedImages() {
+                for (var i = 0; i < totalImages; ++i) {
+                    rotatedImages[i].className = 'rotated-graph-images-hitted';
+                    rotatedMapped[i].className = 'rotated-graph-mapped-hitted';
+                }
+            }
+
+            function setNthRotatedImage(index) {
+                resetRotatedImages();
+                rotatedImages[index].className = 'rotated-graph-images-actived';
+                rotatedMapped[index].className = 'rotated-graph-mapped-actived';
+            }
+
+            function gotoPrevImage() {
+                recentIndex = ((recentIndex-1)+totalImages) % totalImages
+                setNthRotatedImage(recentIndex);
+            }
+
+            function gotoSuccImage() {
+                recentIndex = (recentIndex+1) % totalImages;
+                setNthRotatedImage(recentIndex);
+            }
+
+            (function initRotatedImages() {
+                for (var i = 0; i < totalImages; ++i) {
+                    rotatedMapped[i].setAttribute('data-index', i);
+                }
+                for (var i = 0; i < totalImages; ++i) {
+                    rotatedMapped[i].onclick = function () {
+                        setNthRotatedImage(this.getAttribute('data-index'));
+                    };
+                }
+                setNthRotatedImage(recentIndex);
+            }) ();
+
+            var prevImage = document.querySelector('div.rotated-graph>button:nth-of-type(1)'),
+                succImage = document.querySelector('div.rotated-graph>button:nth-of-type(2)');
+
+            prevImage.onclick = gotoPrevImage, succImage.onclick = gotoSuccImage;
+
+            /* 漏洞：切换图片时，定时器不暂停——可能发生同时切换 2 张的情景。 */
+            var rotatedImagesInterval = setInterval(gotoSuccImage, 5000);
         </script>
 
         <!-- Content -->
