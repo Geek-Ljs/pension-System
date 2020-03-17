@@ -10,6 +10,8 @@ p {
     padding: 0rem 8rem;
 }
 
+/* 漏洞：改回大布局时，需重新设置 display。 */
+
 #page-header {
     display: grid;
     grid-template-columns: 320px minmax(100px, auto) 120px;
@@ -53,6 +55,8 @@ p {
 
     width: 100px;
     height: 38px;
+
+    z-index: 2;
 
     cursor: pointer;
     text-align: center;
@@ -104,6 +108,129 @@ p {
 
 
 
+div.rotated-graph {
+    position: relative;
+
+    width: 100%;
+    height: 240px;
+}
+
+div.rotated-graph>button {
+    position: absolute;
+
+    text-align: center;
+    font-weight: bold;
+
+    color: rgba(9, 59, 219, 0.5);
+    background-color: rgba(255, 255, 255, .5);
+
+    width: 24px;
+    height: 48px;
+
+    border: none;
+    margin: 0px 6px;
+}
+
+div.rotated-graph>button:nth-of-type(1) {
+    top: 96px;
+    left: 0px;
+}
+
+div.rotated-graph>button:nth-of-type(2) {
+    top: 96px;
+    right: 0px;
+}
+
+ul.rotated-graph-images {
+    position: relative;
+
+    list-style: none;
+
+    width: inherit;
+    height: inherit;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.rotated-graph-images>li {
+    position: absolute;
+
+    width: inherit;
+    height: inherit;
+
+    transition: all .8s;
+}
+
+ul.rotated-graph-images>li:nth-of-type(1) {
+    background-color: red;
+}
+ul.rotated-graph-images>li:nth-of-type(2) {
+    background-color: gold;
+}
+ul.rotated-graph-images>li:nth-of-type(3) {
+    background-color: green;
+}
+ul.rotated-graph-images>li:nth-of-type(4) {
+    background-color: aqua;
+}
+ul.rotated-graph-images>li:nth-of-type(5) {
+    background-color: blue;
+}
+
+.rotated-graph-images-hitted {
+    z-index: -2;
+    opacity: 0;
+}
+
+.rotated-graph-images-actived {
+    z-index: -1;
+    opacity: 1;
+}
+
+ul.rotated-graph-mapped {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0px;
+
+    width: 100%;
+
+    padding-left: 0px;
+}
+
+ul.rotated-graph-mapped>li {
+    display: block;
+
+    width: 36px;
+    height: 8px;
+
+    /* border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px; */
+
+    margin: 0px 4px;
+}
+
+.rotated-graph-mapped-hitted {
+    cursor: pointer;
+    background-color: rgba(9, 59, 219, .1);
+
+    border: 2px solid hsla(0, 0%, 100%, .3);
+    border-radius: 3px;
+}
+
+.rotated-graph-mapped-actived {
+    cursor: auto;
+    background-color: rgba(9, 59, 219, .3);
+
+    border: 2px solid rgba(255, 255, 255, .7);
+    border-radius: 3px;
+}
+
+
+
 @media screen and (max-width: 768px) {
     html {
         width: 100%;
@@ -142,7 +269,11 @@ p {
         color: white;
     }
 
-    #page-header-user a:not(:first-child) {
+    #page-header-user>a {
+        color: inherit;
+    }
+
+    #page-header-user>a:not(:first-child) {
         display: none;
     }
 
@@ -174,7 +305,7 @@ p {
         /* display: flex; */
         flex-direction: column;
 
-        position: absolute;
+        position: fixed;
         top: 0px;
         left: 0px;
 
@@ -203,7 +334,7 @@ p {
     }
 
     #page-header-menu>ul>li:hover {
-        /* 需要消除以前定义的 hover。 */
+        /* 漏洞：需要消除以前定义的 hover。 */
     }
 
     #page-header-menu>ul>li>ul {
